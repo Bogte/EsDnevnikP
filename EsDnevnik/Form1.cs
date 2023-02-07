@@ -33,6 +33,7 @@ namespace EsDnevnik
         {
 
         }
-        // Probni komentar
+        // Probni komentar v1.2
+        // Probni komentar v1.2
     }
 }
