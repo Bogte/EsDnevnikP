@@ -28,5 +28,11 @@ namespace EsDnevnik
             Osoba f2 = new Osoba();
             f2.Show();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+        // Probni komentar
     }
 }
