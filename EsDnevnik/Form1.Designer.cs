@@ -83,26 +83,28 @@
             // osobaToolStripMenuItem
             // 
             this.osobaToolStripMenuItem.Name = "osobaToolStripMenuItem";
-            this.osobaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.osobaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.osobaToolStripMenuItem.Text = "Osoba";
             this.osobaToolStripMenuItem.Click += new System.EventHandler(this.osobaToolStripMenuItem_Click);
             // 
             // skolskaGodinaToolStripMenuItem
             // 
             this.skolskaGodinaToolStripMenuItem.Name = "skolskaGodinaToolStripMenuItem";
-            this.skolskaGodinaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.skolskaGodinaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.skolskaGodinaToolStripMenuItem.Text = "Skolska godina";
+            this.skolskaGodinaToolStripMenuItem.Click += new System.EventHandler(this.skolskaGodinaToolStripMenuItem_Click);
             // 
             // smerToolStripMenuItem
             // 
             this.smerToolStripMenuItem.Name = "smerToolStripMenuItem";
-            this.smerToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.smerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.smerToolStripMenuItem.Text = "Smer";
+            this.smerToolStripMenuItem.Click += new System.EventHandler(this.smerToolStripMenuItem_Click);
             // 
             // predmetToolStripMenuItem
             // 
             this.predmetToolStripMenuItem.Name = "predmetToolStripMenuItem";
-            this.predmetToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.predmetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.predmetToolStripMenuItem.Text = "Predmet";
             // 
             // odeljenjaToolStripMenuItem

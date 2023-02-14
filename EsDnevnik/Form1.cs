@@ -20,20 +20,29 @@ namespace EsDnevnik
         private void odeljenjaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Odeljenje f1 = new Odeljenje();
-            f1.Show();
+            f1.ShowDialog();
         }
 
         private void osobaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Osoba f2 = new Osoba();
-            f2.Show();
+            f2.ShowDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
-        // Probni komentar v1.2
-        // Probni komentar v1.2
+
+        private void skolskaGodinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Skolska_Godina f1 = new Skolska_Godina();
+            f1.ShowDialog();
+        }
+
+        private void smerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
