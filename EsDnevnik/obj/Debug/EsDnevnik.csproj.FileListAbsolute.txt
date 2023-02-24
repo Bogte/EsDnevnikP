@@ -34,3 +34,16 @@ C:\Users\Ucenik\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.Cor
 C:\Users\Ucenik\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.exe
 C:\Users\Ucenik\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.pdb
 C:\Users\Ucenik\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Skolska_Godina.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\bin\Debug\EsDnevnik.exe.config
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\bin\Debug\EsDnevnik.exe
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\bin\Debug\EsDnevnik.pdb
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.AssemblyReference.cache
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Form1.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Odeljenje.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Osoba.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Properties.Resources.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Skolska_Godina.resources
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.GenerateResource.cache
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.CoreCompileInputs.cache
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.exe
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.pdb

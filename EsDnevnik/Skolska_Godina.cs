@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace EsDnevnik
 {
@@ -27,18 +28,32 @@ namespace EsDnevnik
             podaci = new DataTable();
             podaci = Konekcija.Unos("SELECT * FROM Skolska_godina");
             dataGridView1.DataSource = podaci;
-            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Obrisi")
+            {
+                if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj podatak?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int indeks;
+                    indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+                    menjanja = new SqlCommand();
+                    menjanja.CommandText = ("DELETE FROM Skolska_godina WHERE id = " + indeks);
+                    SqlConnection con = new SqlConnection(Konekcija.Veza());
+                    con.Open();
+                    menjanja.Connection = con;
+                    menjanja.ExecuteNonQuery();
+                    con.Close();
 
-
-
-
-            
-    
+                    dataGridView1.Rows.RemoveAt(e.ColumnIndex);
+                    podaci = new DataTable();
+                    podaci = Konekcija.Unos("SELECT * FROM Skolska_godina");
+                    dataGridView1.DataSource = podaci;
+                    dataGridView1.Columns[1].ReadOnly = true;
+                }
+            }
         }
     }
 }
