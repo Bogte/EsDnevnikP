@@ -29,20 +29,21 @@ namespace EsDnevnik
             f2.ShowDialog();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void skolskaGodinaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Skolska_Godina f1 = new Skolska_Godina();
+            Forma f1 = new Forma("Skolska_godina");
             f1.ShowDialog();
         }
 
         private void smerToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void predmetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma f1 = new Forma("Predmet");
+            f1.ShowDialog();
         }
     }
 }

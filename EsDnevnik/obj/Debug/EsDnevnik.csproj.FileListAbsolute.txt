@@ -42,8 +42,8 @@ C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Form1.resou
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Odeljenje.resources
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Osoba.resources
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Properties.Resources.resources
-C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Skolska_Godina.resources
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.GenerateResource.cache
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.csproj.CoreCompileInputs.cache
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.exe
 C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.pdb
+C:\Users\filip\Source\Repos\EsDnevnikP\EsDnevnik\obj\Debug\EsDnevnik.Forma.resources

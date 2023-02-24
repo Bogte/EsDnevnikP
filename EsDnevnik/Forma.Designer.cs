@@ -1,7 +1,7 @@
 ﻿
 namespace EsDnevnik
 {
-    partial class Skolska_Godina
+    partial class Forma
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@ namespace EsDnevnik
             this.Obrisi,
             this.Menjaj});
             this.dataGridView1.Location = new System.Drawing.Point(221, 73);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(648, 325);
@@ -67,14 +67,14 @@ namespace EsDnevnik
             this.Menjaj.UseColumnTextForButtonValue = true;
             this.Menjaj.Width = 125;
             // 
-            // Skolska_Godina
+            // Forma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Skolska_Godina";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "Forma";
             this.Text = "Skolska_Godina";
             this.Load += new System.EventHandler(this.Skolska_Godina_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
