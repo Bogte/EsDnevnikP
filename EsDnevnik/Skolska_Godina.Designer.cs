@@ -31,6 +31,7 @@ namespace EsDnevnik
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Obrisi = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Menjaj = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,7 +39,8 @@ namespace EsDnevnik
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Obrisi});
+            this.Obrisi,
+            this.Menjaj});
             this.dataGridView1.Location = new System.Drawing.Point(221, 73);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
@@ -55,6 +57,15 @@ namespace EsDnevnik
             this.Obrisi.Text = "Obrisi";
             this.Obrisi.UseColumnTextForButtonValue = true;
             this.Obrisi.Width = 125;
+            // 
+            // Menjaj
+            // 
+            this.Menjaj.HeaderText = "Menjaj";
+            this.Menjaj.MinimumWidth = 6;
+            this.Menjaj.Name = "Menjaj";
+            this.Menjaj.Text = "Menjaj";
+            this.Menjaj.UseColumnTextForButtonValue = true;
+            this.Menjaj.Width = 125;
             // 
             // Skolska_Godina
             // 
@@ -75,5 +86,6 @@ namespace EsDnevnik
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewButtonColumn Obrisi;
+        private System.Windows.Forms.DataGridViewButtonColumn Menjaj;
     }
 }

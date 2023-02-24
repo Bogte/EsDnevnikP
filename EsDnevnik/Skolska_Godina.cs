@@ -38,7 +38,7 @@ namespace EsDnevnik
                 if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj podatak?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int indeks;
-                    indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+                    indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
                     menjanja = new SqlCommand();
                     menjanja.CommandText = ("DELETE FROM Skolska_godina WHERE id = " + indeks);
                     SqlConnection con = new SqlConnection(Konekcija.Veza());
@@ -54,6 +54,25 @@ namespace EsDnevnik
                     dataGridView1.Columns[1].ReadOnly = true;
                 }
             }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "Menjaj")
+            {
+                if (MessageBox.Show("Da li ste sigurni da zelite da izmenite podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string naziv;
+                    int indeks;
+                    indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                    naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
+                    menjanja = new SqlCommand();
+                    menjanja.CommandText = ("UPDATE Skolska_godina SET naziv = " + "'" + naziv + "'" + "WHERE id = " + indeks);
+                    SqlConnection con = new SqlConnection(Konekcija.Veza());
+                    con.Open();
+                    menjanja.Connection = con;
+                    menjanja.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+
         }
     }
 }
