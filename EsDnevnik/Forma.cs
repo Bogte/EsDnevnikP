@@ -60,8 +60,16 @@ namespace EsDnevnik
                     indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
                     naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
                     menjanja = new SqlCommand();
-                    menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks +
-                        " UPDATE " + tabela + " SET naziv = " + "'" + razred + "'" + " WHERE id = " + indeks);
+
+                    if (tabela == "Predmet")
+                    {
+                        menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks +
+                            " UPDATE " + tabela + " SET naziv = " + "'" + razred + "'" + " WHERE id = " + indeks);
+                    }
+                    else
+                    {
+                        menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks);
+                    }
                     SqlConnection con = new SqlConnection(Konekcija.Veza());
                     con.Open();
                     menjanja.Connection = con;
