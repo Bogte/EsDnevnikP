@@ -32,7 +32,7 @@ namespace EsDnevnik
             {
                 try
                 {
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatake?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatake?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         int indeks;
                         indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
@@ -51,15 +51,15 @@ namespace EsDnevnik
                         dataGridView1.Columns["id"].ReadOnly = true;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Ne mozete da obrisete ove podatake, druge tabele zahtevaju ove podatake!");
+                    MessageBox.Show("Ne mozete da obrisete ove podatake, druge tabele zahtevaju ove podatake! - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Menjaj")
             {
-                if (MessageBox.Show("Da li ste sigurni da zelite da izmenite ove podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Da li ste sigurni da zelite da izmenite ove podatke?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string naziv;
                     int indeks;
@@ -92,7 +92,7 @@ namespace EsDnevnik
             {
                 try
                 {
-                    if (MessageBox.Show("Da li ste sigurni da zelite da dodate ove podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Da li ste sigurni da zelite da dodate ove podatke?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         string naziv;
                         naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
@@ -138,7 +138,7 @@ namespace EsDnevnik
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source);
+                    MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
