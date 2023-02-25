@@ -24,7 +24,6 @@ namespace EsDnevnik
             podaci = Konekcija.Unos("SELECT * FROM " + tabela);
             dataGridView1.DataSource = podaci;
             dataGridView1.Columns["id"].ReadOnly = true;
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -106,8 +105,7 @@ namespace EsDnevnik
 
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
-                            dataGridView2.DataSource = podaci;
-                            if (dataGridView2.RowCount != 1) throw new Exception();
+                            if (podaci.Rows.Count == 1) throw new Exception();
 
                             menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "', " + "'" + razred + "')");
 
@@ -121,8 +119,7 @@ namespace EsDnevnik
                         {
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
-                            dataGridView2.DataSource = podaci;
-                            if (dataGridView2.RowCount != 1) throw new Exception("Nesto nije uredu");
+                            if (podaci.Rows.Count == 1) throw new Exception();
 
                             menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "')");
 
@@ -139,7 +136,7 @@ namespace EsDnevnik
                         dataGridView1.Columns["id"].ReadOnly = true;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source);
                 }
