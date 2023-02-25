@@ -33,7 +33,7 @@ namespace EsDnevnik
             {
                 try
                 {
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatak?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatake?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         int indeks;
                         indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
@@ -52,9 +52,9 @@ namespace EsDnevnik
                         dataGridView1.Columns["id"].ReadOnly = true;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Ne mozete da obrisete podatak! Druge tabele zahtevaju ovaj podatak!");
+                    MessageBox.Show("Ne mozete da obrisete ove podatake, druge tabele zahtevaju ove podatake!");
                 }
             }
 
