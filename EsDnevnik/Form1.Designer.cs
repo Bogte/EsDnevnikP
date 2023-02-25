@@ -43,11 +43,12 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.pictureBox1.Image = global::EsDnevnik.Properties.Resources.images;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(699, 183);
+            this.pictureBox1.Size = new System.Drawing.Size(687, 207);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -76,34 +77,34 @@
             this.predmetToolStripMenuItem});
             this.sifarniciToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.sifarniciToolStripMenuItem.Name = "sifarniciToolStripMenuItem";
-            this.sifarniciToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.sifarniciToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.sifarniciToolStripMenuItem.Text = "Sifarnici";
             // 
             // osobaToolStripMenuItem
             // 
             this.osobaToolStripMenuItem.Name = "osobaToolStripMenuItem";
-            this.osobaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.osobaToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.osobaToolStripMenuItem.Text = "Osoba";
             this.osobaToolStripMenuItem.Click += new System.EventHandler(this.osobaToolStripMenuItem_Click);
             // 
             // skolskaGodinaToolStripMenuItem
             // 
             this.skolskaGodinaToolStripMenuItem.Name = "skolskaGodinaToolStripMenuItem";
-            this.skolskaGodinaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.skolskaGodinaToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.skolskaGodinaToolStripMenuItem.Text = "Skolska godina";
             this.skolskaGodinaToolStripMenuItem.Click += new System.EventHandler(this.skolskaGodinaToolStripMenuItem_Click);
             // 
             // smerToolStripMenuItem
             // 
             this.smerToolStripMenuItem.Name = "smerToolStripMenuItem";
-            this.smerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.smerToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.smerToolStripMenuItem.Text = "Smer";
             this.smerToolStripMenuItem.Click += new System.EventHandler(this.smerToolStripMenuItem_Click);
             // 
             // predmetToolStripMenuItem
             // 
             this.predmetToolStripMenuItem.Name = "predmetToolStripMenuItem";
-            this.predmetToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.predmetToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.predmetToolStripMenuItem.Text = "Predmet";
             this.predmetToolStripMenuItem.Click += new System.EventHandler(this.predmetToolStripMenuItem_Click);
             // 
@@ -111,7 +112,7 @@
             // 
             this.odeljenjaToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.odeljenjaToolStripMenuItem.Name = "odeljenjaToolStripMenuItem";
-            this.odeljenjaToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.odeljenjaToolStripMenuItem.Size = new System.Drawing.Size(87, 26);
             this.odeljenjaToolStripMenuItem.Text = "Odeljenja";
             this.odeljenjaToolStripMenuItem.Click += new System.EventHandler(this.odeljenjaToolStripMenuItem_Click);
             // 
@@ -119,7 +120,7 @@
             // 
             this.izvestajiToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.izvestajiToolStripMenuItem.Name = "izvestajiToolStripMenuItem";
-            this.izvestajiToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.izvestajiToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.izvestajiToolStripMenuItem.Text = "Izvestaji";
             // 
             // Form1
@@ -130,7 +131,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "EsDnevnik";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
