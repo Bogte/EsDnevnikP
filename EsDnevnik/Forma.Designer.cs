@@ -45,11 +45,11 @@ namespace EsDnevnik
             this.Obrisi,
             this.Menjaj,
             this.Dodaj});
-            this.dataGridView1.Location = new System.Drawing.Point(268, 43);
+            this.dataGridView1.Location = new System.Drawing.Point(50, 38);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(648, 325);
+            this.dataGridView1.Size = new System.Drawing.Size(982, 422);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -100,7 +100,7 @@ namespace EsDnevnik
             this.Controls.Add(this.dataGridView2);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Forma";
-            this.Text = "Skolska_Godina";
+            this.Text = "Forma";
             this.Load += new System.EventHandler(this.Skolska_Godina_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

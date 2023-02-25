@@ -13,8 +13,8 @@ namespace EsDnevnik
 
         public Forma(string ime)
         {
-            tabela = ime;            
-
+            tabela = ime;
+            
             InitializeComponent();
         }
 
@@ -31,25 +31,33 @@ namespace EsDnevnik
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Obrisi")
             {
-                if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatak?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                try
                 {
-                    int indeks;
-                    indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
-                    menjanja = new SqlCommand();
-                    menjanja.CommandText = ("DELETE FROM " + tabela + " WHERE id = " + indeks);
-                    SqlConnection con = new SqlConnection(Konekcija.Veza());
-                    con.Open();
-                    menjanja.Connection = con;
-                    menjanja.ExecuteNonQuery();
-                    con.Close();
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatak?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        int indeks;
+                        indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                        menjanja = new SqlCommand();
+                        menjanja.CommandText = ("DELETE FROM " + tabela + " WHERE id = " + indeks);
+                        SqlConnection con = new SqlConnection(Konekcija.Veza());
+                        con.Open();
+                        menjanja.Connection = con;
+                        menjanja.ExecuteNonQuery();
+                        con.Close();
 
-                    dataGridView1.Rows.RemoveAt(e.ColumnIndex);
-                    podaci = new DataTable();
-                    podaci = Konekcija.Unos("SELECT * FROM " + tabela);
-                    dataGridView1.DataSource = podaci;
-                    dataGridView1.Columns["id"].ReadOnly = true;
+                        dataGridView1.Rows.RemoveAt(e.ColumnIndex);
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT * FROM " + tabela);
+                        dataGridView1.DataSource = podaci;
+                        dataGridView1.Columns["id"].ReadOnly = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ne mozete da obrisete podatak! Druge tabele zahtevaju ovaj podatak!");
                 }
             }
+
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Menjaj")
             {
                 if (MessageBox.Show("Da li ste sigurni da zelite da izmenite ove podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -80,11 +88,12 @@ namespace EsDnevnik
                     con.Close();
                 }
             }
+
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Dodaj")
             {
-                if (MessageBox.Show("Da li ste sigurni da zelite da dodate ove podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                try
                 {
-                    try
+                    if (MessageBox.Show("Da li ste sigurni da zelite da dodate ove podatke?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         string naziv;
                         naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
@@ -98,7 +107,7 @@ namespace EsDnevnik
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
                             dataGridView2.DataSource = podaci;
-                            if (dataGridView2.RowCount != 1) throw new Exception("Nesto nije uredu");
+                            if (dataGridView2.RowCount != 1) throw new Exception();
 
                             menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "', " + "'" + razred + "')");
 
@@ -128,12 +137,11 @@ namespace EsDnevnik
                         podaci = Konekcija.Unos("SELECT * FROM " + tabela);
                         dataGridView1.DataSource = podaci;
                         dataGridView1.Columns["id"].ReadOnly = true;
-
                     }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Ne mozete da dodate vec postojeci podatak! " + " - " + ex.Source);
-                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source);
                 }
             }
 
