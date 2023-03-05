@@ -22,9 +22,39 @@ namespace EsDnevnik
         {
             podaci = new DataTable();
             podaci = Konekcija.Unos("SELECT * FROM " + tabela);
-            
-            dataGridView1.DataSource = podaci;
-            dataGridView1.Columns["id"].ReadOnly = true;
+
+            if (tabela == "Predmet")
+            {
+                for (int i = 0; i < podaci.Rows.Count; i++)
+                {
+                    dataGridView1.Rows.Add();
+                    dataGridView1.Rows[i].Cells["ID"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                    dataGridView1.Rows[i].Cells["Naziv"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                    dataGridView1.Rows[i].Cells["Razred"].Value = Convert.ToString(podaci.Rows[i]["razred"]);
+                }
+                
+            }
+            else if (tabela == "Smer")
+            {
+                dataGridView1.Columns["Naziv"].Visible = false;
+                dataGridView1.Columns["Razred"].Visible = false;
+
+                for (int i = 0; i < podaci.Rows.Count; i++)
+                {
+                    dataGridView1.Rows.Add();
+                    dataGridView1.Rows[i].Cells["ID"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                    dataGridView1.Rows[i].Cells["Smer"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                }
+            }
+            else
+            {
+                dataGridView1.Columns["Naziv"].Visible = false;
+                dataGridView1.Columns["Razred"].Visible = false;
+                dataGridView1.Columns["Smer"].Visible = false;
+                dataGridView1.Columns["ID"].Visible = false;
+                dataGridView1.DataSource = podaci;
+                dataGridView1.Columns["id"].ReadOnly = true;
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -35,6 +65,7 @@ namespace EsDnevnik
                 {
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete ove podatake?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+                        int kurac = e.RowIndex;
                         int indeks;
                         indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
                         menjanja = new SqlCommand();
