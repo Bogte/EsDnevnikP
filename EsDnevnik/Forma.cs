@@ -22,6 +22,13 @@ namespace EsDnevnik
         {
             podaci = new DataTable();
             podaci = Konekcija.Unos("SELECT * FROM " + tabela);
+            if (dataGridView1.Rows.Count != 1)
+            {
+                while (dataGridView1.Rows.Count != 1)
+                {
+                    dataGridView1.Rows.RemoveAt(0);
+                }
+            }
 
             if (tabela == "Predmet")
             {
@@ -33,7 +40,7 @@ namespace EsDnevnik
                 {
                     dataGridView1.Rows.Add();
                     dataGridView1.Rows[i].Cells["IDD"].Value = Convert.ToString(podaci.Rows[i]["id"]);
-                    dataGridView1.Rows[i].Cells["Naziv"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                    dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
                     dataGridView1.Rows[i].Cells["Razred"].Value = Convert.ToString(podaci.Rows[i]["razred"]);
                 }
 
@@ -41,7 +48,7 @@ namespace EsDnevnik
             else if (tabela == "Smer")
             {
                 label2.Text = tabela;
-                dataGridView1.Columns["Naziv"].Visible = false;
+                dataGridView1.Columns["Predmet"].Visible = false;
                 dataGridView1.Columns["Razred"].Visible = false;
 
                 for (int i = 0; i < podaci.Rows.Count; i++)
@@ -54,7 +61,7 @@ namespace EsDnevnik
             else
             {
                 label2.Text = "Skolska godina";
-                dataGridView1.Columns["Naziv"].Visible = false;
+                dataGridView1.Columns["Predmet"].Visible = false;
                 dataGridView1.Columns["Razred"].Visible = false;
                 dataGridView1.Columns["Smer"].Visible = false;
                 dataGridView1.Columns["IDD"].Visible = false;
@@ -80,23 +87,22 @@ namespace EsDnevnik
                         if (tabela == "Skolska_godina")
                         {
                             indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
-                            menjanja = new SqlCommand();
-                            menjanja.CommandText = ("DELETE FROM " + tabela + " WHERE id = " + indeks);
-
-                            SqlConnection con = new SqlConnection(Konekcija.Veza());
-                            con.Open();
-                            menjanja.Connection = con;
-                            menjanja.ExecuteNonQuery();
-                            con.Close();
-
-                            dataGridView1.Rows.RemoveAt(e.ColumnIndex);
-
-                            Osvezi(tabela);
                         }
                         else
                         {
-                            indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
+                            indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IDD"].Value);
                         }
+
+                        menjanja = new SqlCommand();
+                        menjanja.CommandText = ("DELETE FROM " + tabela + " WHERE id = " + indeks);
+
+                        SqlConnection con = new SqlConnection(Konekcija.Veza());
+                        con.Open();
+                        menjanja.Connection = con;
+                        menjanja.ExecuteNonQuery();
+                        con.Close();
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+                        Osvezi(tabela);
                     }
                 }
                 catch (Exception ex)
@@ -111,16 +117,16 @@ namespace EsDnevnik
                 {
                     if (MessageBox.Show("Da li ste sigurni da zelite da izmenite ove podatke?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        string naziv;
-                        int indeks;
-                        indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
-                        naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
                         menjanja = new SqlCommand();
 
                         if (tabela == "Predmet")
                         {
+                            int indeks;
+                            indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IDD"].Value);
                             string razred;
-                            razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["razred"].Value);
+                            razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Razred"].Value);
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
 
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
@@ -129,8 +135,26 @@ namespace EsDnevnik
                             menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks +
                                 " UPDATE " + tabela + " SET naziv = " + "'" + razred + "'" + " WHERE id = " + indeks);
                         }
+                        else if (tabela == "Smer")
+                        {
+                            int indeks;
+                            indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IDD"].Value);
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Smer"].Value);
+
+                            podaci = new DataTable();
+                            podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
+                            if (podaci.Rows.Count >= 1) throw new Exception();
+
+                            menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks);
+                        }
                         else
                         {
+                            int indeks;
+                            indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
+
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
                             if (podaci.Rows.Count >= 1) throw new Exception();
@@ -147,10 +171,7 @@ namespace EsDnevnik
                 }
                 catch(Exception ex)
                 {
-                    podaci = new DataTable();
-                    podaci = Konekcija.Unos("SELECT * FROM " + tabela);
-                    dataGridView1.DataSource = podaci;
-                    dataGridView1.Columns["id"].ReadOnly = true;
+                    Osvezi(tabela);
                     MessageBox.Show("Podatak vec postoji u tabeli - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -161,14 +182,14 @@ namespace EsDnevnik
                 {
                     if (MessageBox.Show("Da li ste sigurni da zelite da dodate ove podatke?", "EsDnevnik", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        string naziv;
-                        naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
                         menjanja = new SqlCommand();
 
                         if (tabela == "Predmet")
                         {
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
                             string razred;
-                            razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["razred"].Value);
+                            razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Razred"].Value);
 
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
@@ -176,8 +197,20 @@ namespace EsDnevnik
 
                             menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "', " + "'" + razred + "')");
                         }
+                        else if (tabela == "Smer")
+                        {
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Smer"].Value);
+                            podaci = new DataTable();
+                            podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
+                            if (podaci.Rows.Count >= 1) throw new Exception();
+
+                            menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "')");
+                        }
                         else
                         {
+                            string naziv;
+                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
                             if (podaci.Rows.Count >= 1) throw new Exception();
@@ -191,10 +224,7 @@ namespace EsDnevnik
                         menjanja.ExecuteNonQuery();
                         con.Close();
 
-                        podaci = new DataTable();
-                        podaci = Konekcija.Unos("SELECT * FROM " + tabela);
-                        dataGridView1.DataSource = podaci;
-                        dataGridView1.Columns["id"].ReadOnly = true;
+                        Osvezi(tabela);
                     }
                 }
                 catch (Exception ex)
@@ -204,6 +234,14 @@ namespace EsDnevnik
             }
 
 
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            /*if (Convert.ToString(dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["ÏDD"].Value) == "" || Convert.ToString(dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["id"].Value) == "")
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+            }*/
         }
     }
 }
