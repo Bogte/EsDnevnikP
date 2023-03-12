@@ -20,53 +20,60 @@ namespace EsDnevnik
 
         private void Osvezi(string tabela)
         {
-            podaci = new DataTable();
-            podaci = Konekcija.Unos("SELECT * FROM " + tabela);
-            if (dataGridView1.Rows.Count != 1)
+            try
             {
-                while (dataGridView1.Rows.Count != 1)
+                podaci = new DataTable();
+                podaci = Konekcija.Unos("SELECT * FROM " + tabela);
+                if (dataGridView1.Rows.Count != 1)
                 {
-                    dataGridView1.Rows.RemoveAt(0);
-                }
-            }
-
-            if (tabela == "Predmet")
-            {
-                textBox3.Visible = true;
-                label3.Visible = true;
-                label2.Text = tabela;
-                dataGridView1.Columns["Smer"].Visible = false;
-                for (int i = 0; i < podaci.Rows.Count; i++)
-                {
-                    dataGridView1.Rows.Add();
-                    dataGridView1.Rows[i].Cells["IDD"].Value = Convert.ToString(podaci.Rows[i]["id"]);
-                    dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
-                    dataGridView1.Rows[i].Cells["Razred"].Value = Convert.ToString(podaci.Rows[i]["razred"]);
+                    while (dataGridView1.Rows.Count != 1)
+                    {
+                        dataGridView1.Rows.RemoveAt(0);
+                    }
                 }
 
-            }
-            else if (tabela == "Smer")
-            {
-                label2.Text = tabela;
-                dataGridView1.Columns["Predmet"].Visible = false;
-                dataGridView1.Columns["Razred"].Visible = false;
-
-                for (int i = 0; i < podaci.Rows.Count; i++)
+                if (tabela == "Predmet")
                 {
-                    dataGridView1.Rows.Add();
-                    dataGridView1.Rows[i].Cells["IDD"].Value = Convert.ToString(podaci.Rows[i]["id"]);
-                    dataGridView1.Rows[i].Cells["Smer"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                    textBox3.Visible = true;
+                    label3.Visible = true;
+                    label2.Text = tabela;
+                    dataGridView1.Columns["Smer"].Visible = false;
+                    for (int i = 0; i < podaci.Rows.Count; i++)
+                    {
+                        dataGridView1.Rows.Add();
+                        dataGridView1.Rows[i].Cells["IDD"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                        dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                        dataGridView1.Rows[i].Cells["Razred"].Value = Convert.ToString(podaci.Rows[i]["razred"]);
+                    }
+
+                }
+                else if (tabela == "Smer")
+                {
+                    label2.Text = tabela;
+                    dataGridView1.Columns["Predmet"].Visible = false;
+                    dataGridView1.Columns["Razred"].Visible = false;
+
+                    for (int i = 0; i < podaci.Rows.Count; i++)
+                    {
+                        dataGridView1.Rows.Add();
+                        dataGridView1.Rows[i].Cells["IDD"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                        dataGridView1.Rows[i].Cells["Smer"].Value = Convert.ToString(podaci.Rows[i]["naziv"]);
+                    }
+                }
+                else
+                {
+                    label2.Text = "Skolska godina";
+                    dataGridView1.Columns["Predmet"].Visible = false;
+                    dataGridView1.Columns["Razred"].Visible = false;
+                    dataGridView1.Columns["Smer"].Visible = false;
+                    dataGridView1.Columns["IDD"].Visible = false;
+                    dataGridView1.DataSource = podaci;
+                    dataGridView1.Columns["id"].ReadOnly = true;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                label2.Text = "Skolska godina";
-                dataGridView1.Columns["Predmet"].Visible = false;
-                dataGridView1.Columns["Razred"].Visible = false;
-                dataGridView1.Columns["Smer"].Visible = false;
-                dataGridView1.Columns["IDD"].Visible = false;
-                dataGridView1.DataSource = podaci;
-                dataGridView1.Columns["id"].ReadOnly = true;
+                MessageBox.Show(ex.Message + " " + ex.Source);
             }
         }
 
@@ -133,7 +140,7 @@ namespace EsDnevnik
                             if (podaci.Rows.Count >= 1) throw new Exception();
 
                             menjanja.CommandText = ("UPDATE " + tabela + " SET naziv = " + "'" + naziv + "'" + " WHERE id = " + indeks +
-                                " UPDATE " + tabela + " SET naziv = " + "'" + razred + "'" + " WHERE id = " + indeks);
+                                " UPDATE " + tabela + " SET razred = " + "'" + razred + "'" + " WHERE id = " + indeks);
                         }
                         else if (tabela == "Smer")
                         {
@@ -167,6 +174,8 @@ namespace EsDnevnik
                         menjanja.Connection = con;
                         menjanja.ExecuteNonQuery();
                         con.Close();
+
+                        Osvezi(tabela);
                     }
                 }
                 catch(Exception ex)
