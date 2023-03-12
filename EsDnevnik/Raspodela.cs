@@ -35,6 +35,19 @@ namespace EsDnevnik
                 }
             }
 
+            for (int i = 0; i < podaci.Rows.Count; i++)
+            {
+                dataGridView1.Rows.Add();
+                dataGridView1.Rows[i].Cells["id"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                dataGridView1.Rows[i].Cells["Nastavnik"].Value = Convert.ToString(podaci.Rows[i]["Nastavnik"]);
+                dataGridView1.Rows[i].Cells["Godina"].Value = Convert.ToString(podaci.Rows[i]["Godina"]);
+                dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["Predmet"]);
+                dataGridView1.Rows[i].Cells["Odeljenje"].Value = Convert.ToString(podaci.Rows[i]["Odeljenje"]);
+            }
+        }
+
+        private void Raspodela_Load(object sender, EventArgs e)
+        {
             podaci1 = new DataTable();//Dodavanje skolskih godina
             podaci1 = Konekcija.Unos("SELECT naziv FROM Skolska_godina");
             pomocna = new string[podaci1.Rows.Count];
@@ -74,20 +87,6 @@ namespace EsDnevnik
                 pomocna[i] = Convert.ToString(podaci1.Rows[i]["Odlj"]);
                 Odeljenje.Items.Add(pomocna[i]);
             }
-
-            for (int i = 0; i < podaci.Rows.Count; i++)
-            {
-                dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells["id"].Value = Convert.ToString(podaci.Rows[i]["id"]);
-                dataGridView1.Rows[i].Cells["Nastavnik"].Value = Convert.ToString(podaci.Rows[i]["Nastavnik"]);
-                dataGridView1.Rows[i].Cells["Godina"].Value = Convert.ToString(podaci.Rows[i]["Godina"]);
-                dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["Predmet"]);
-                dataGridView1.Rows[i].Cells["Odeljenje"].Value = Convert.ToString(podaci.Rows[i]["Odeljenje"]);
-            }
-        }
-
-        private void Raspodela_Load(object sender, EventArgs e)
-        {
             Osvezi();
         }
 
