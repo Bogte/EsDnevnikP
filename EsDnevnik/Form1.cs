@@ -61,5 +61,11 @@ namespace EsDnevnik
             Upisnica f = new Upisnica();
             f.ShowDialog();
         }
+
+        private void oceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ocene f = new Ocene();
+            f.ShowDialog();
+        }
     }
 }

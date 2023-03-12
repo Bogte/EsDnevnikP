@@ -75,3 +75,4 @@ C:\Users\filip\Source\Repos\EsDnevnikP2.0\EsDnevnik\obj\Debug\EsDnevnik.exe
 C:\Users\filip\Source\Repos\EsDnevnikP2.0\EsDnevnik\obj\Debug\EsDnevnik.pdb
 C:\Users\filip\source\repos\EsDnevnikP2.0\EsDnevnik\obj\Debug\EsDnevnik.Raspodela.resources
 C:\Users\filip\source\repos\EsDnevnikP2.0\EsDnevnik\obj\Debug\EsDnevnik.Upisnica.resources
+C:\Users\filip\source\repos\EsDnevnikP2.0\EsDnevnik\obj\Debug\EsDnevnik.Ocene.resources

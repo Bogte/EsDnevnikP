@@ -90,15 +90,19 @@ namespace EsDnevnik
             Osvezi();
         }
 
-        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+        /*private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
         {
-            int indeks = dataGridView1.CurrentRow.Index;
-            textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
-            textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Nastavnik"].Value);
-            textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Godina"].Value);
-            textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
-            textBox5.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
-        }
+            try
+            {
+                int indeks = dataGridView1.CurrentRow.Index;
+                textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
+                textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Nastavnik"].Value);
+                textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Godina"].Value);
+                textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
+                textBox5.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
+            }
+            catch { }
+        }*/
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -199,7 +203,7 @@ namespace EsDnevnik
                         string predmet = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
                         string[] odeljenje = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Odeljenje"].Value).Split('/');
 
-                        if (indeks == 0 || ime_prezime[0] == "" || ime_prezime[1] == "" || godina == "" || predmet == "" || odeljenje[0] == "" || odeljenje[1] == "")
+                        if (ime_prezime[0] == "" || ime_prezime[1] == "" || godina == "" || predmet == "" || odeljenje[0] == "" || odeljenje[1] == "")
                             throw new Exception();
 
                         podaci = new DataTable();
