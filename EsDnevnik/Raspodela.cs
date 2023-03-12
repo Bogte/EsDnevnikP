@@ -134,7 +134,7 @@ namespace EsDnevnik
                     Osvezi();
                 }
             }
-            /*
+            
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Dodaj")
             {
                 try
@@ -143,39 +143,36 @@ namespace EsDnevnik
                     {
                         menjanja = new SqlCommand();
 
-                        if (tabela == "Predmet")
-                        {
-                            string naziv;
-                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
-                            string razred;
-                            razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Razred"].Value);
+                        int indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                        string[] ime_prezime = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nastavnik"].Value).Split(' ');
+                        string godina = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Godina"].Value);
+                        string predmet = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
+                        string[] odeljenje = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Odeljenje"].Value).Split('/');
 
-                            podaci = new DataTable();
-                            podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
-                            if (podaci.Rows.Count >= 1) throw new Exception();
+                        if (indeks == 0 || ime_prezime[0] == "" || ime_prezime[1] == "" || godina == "" || predmet == "" || odeljenje[0] == "" || odeljenje[1] == "")
+                            throw new Exception();
 
-                            menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "', " + "'" + razred + "')");
-                        }
-                        else if (tabela == "Smer")
-                        {
-                            string naziv;
-                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Smer"].Value);
-                            podaci = new DataTable();
-                            podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
-                            if (podaci.Rows.Count >= 1) throw new Exception();
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT id FROM Osoba WHERE ime = " + "'" + ime_prezime[0] + "' AND prezime = " + "'" + ime_prezime[1] + "'");
+                        int osoba_id = (int)podaci.Rows[0][0];
 
-                            menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "')");
-                        }
-                        else
-                        {
-                            string naziv;
-                            naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["naziv"].Value);
-                            podaci = new DataTable();
-                            podaci = Konekcija.Unos("SELECT naziv FROM " + tabela + " WHERE naziv = " + "'" + naziv + "'");
-                            if (podaci.Rows.Count >= 1) throw new Exception();
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT id FROM Skolska_godina WHERE naziv = " + "'" + godina + "'");
+                        int godina_id = (int)podaci.Rows[0][0];
 
-                            menjanja.CommandText = ("INSERT INTO " + tabela + " VALUES (" + "'" + naziv + "')");
-                        }
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT id FROM Predmet WHERE naziv = " + "'" + predmet + "'");
+                        int predmet_id = (int)podaci.Rows[0][0];
+
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT id FROM Odeljenje WHERE razred = " + "'" + odeljenje[0] + "' AND indeks = " + "'" + odeljenje[1] + "'");
+                        int odeljenje_id = (int)podaci.Rows[0][0];
+
+                        podaci = new DataTable();
+                        podaci = Konekcija.Unos("SELECT * FROM Raspodela WHERE nastavnik_id = " + osoba_id + " AND godina_id = " + godina_id + " AND predmet_id = " + predmet_id + " AND odeljenje_id = " + odeljenje_id);
+                        if (podaci.Rows.Count >= 1) throw new Exception();
+
+                        menjanja.CommandText = ("INSERT INTO Raspodela VALUES (" + osoba_id + ", " + godina_id + ", " + predmet_id + ", " + odeljenje_id + ")");
 
                         SqlConnection con = new SqlConnection(Konekcija.Veza());
                         con.Open();
@@ -183,14 +180,16 @@ namespace EsDnevnik
                         menjanja.ExecuteNonQuery();
                         con.Close();
 
-                        Osvezi(tabela);
+                        Osvezi();
                     }
+                        
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Osvezi();
                 }
-            }*/
+            }
         }
     }
 }
