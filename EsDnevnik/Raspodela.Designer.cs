@@ -37,6 +37,16 @@
             this.Godina = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Predmet = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Odeljenje = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,9 +66,10 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1173, 445);
+            this.dataGridView1.Size = new System.Drawing.Size(1174, 445);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CurrentCellChanged += new System.EventHandler(this.dataGridView1_CurrentCellChanged);
             // 
             // Obrisi
             // 
@@ -98,14 +109,6 @@
             // Nastavnik
             // 
             this.Nastavnik.HeaderText = "Nastavnik";
-            this.Nastavnik.Items.AddRange(new object[] {
-            "Cedo Skoric",
-            "Dragana Stojanovic",
-            "Branko Vrhovac",
-            "Natasa Majstrovic",
-            "Nevena Vasilic-Lukic",
-            "Marina Jovicic-Samardzija",
-            "Aleksandar Gerasimovic"});
             this.Nastavnik.MinimumWidth = 6;
             this.Nastavnik.Name = "Nastavnik";
             this.Nastavnik.Width = 125;
@@ -113,11 +116,6 @@
             // Godina
             // 
             this.Godina.HeaderText = "Godina";
-            this.Godina.Items.AddRange(new object[] {
-            "2019/20",
-            "2020/21",
-            "2021/22",
-            "2022/23"});
             this.Godina.MinimumWidth = 6;
             this.Godina.Name = "Godina";
             this.Godina.Width = 125;
@@ -125,14 +123,6 @@
             // Predmet
             // 
             this.Predmet.HeaderText = "Predmet";
-            this.Predmet.Items.AddRange(new object[] {
-            "Baze podataka 2",
-            "Programiranje",
-            "Srpski jezik",
-            "Matematika",
-            "Paradigme",
-            "Engleski jezik",
-            "Fizika"});
             this.Predmet.MinimumWidth = 6;
             this.Predmet.Name = "Predmet";
             this.Predmet.Width = 125;
@@ -140,26 +130,122 @@
             // Odeljenje
             // 
             this.Odeljenje.HeaderText = "Odeljenje";
-            this.Odeljenje.Items.AddRange(new object[] {
-            "3/9",
-            "4/9",
-            "3/10",
-            "4/10"});
             this.Odeljenje.MinimumWidth = 6;
             this.Odeljenje.Name = "Odeljenje";
             this.Odeljenje.Width = 125;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(21, 27);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(230, 22);
+            this.textBox1.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(257, 27);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(230, 22);
+            this.textBox2.TabIndex = 2;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(493, 27);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(230, 22);
+            this.textBox3.TabIndex = 3;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(729, 27);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(230, 22);
+            this.textBox4.TabIndex = 4;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Enabled = false;
+            this.textBox5.Location = new System.Drawing.Point(965, 27);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(230, 22);
+            this.textBox5.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Enabled = false;
+            this.label1.Location = new System.Drawing.Point(21, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Id";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Enabled = false;
+            this.label2.Location = new System.Drawing.Point(254, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 16);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Nastavnik";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(490, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Godina";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Enabled = false;
+            this.label4.Location = new System.Drawing.Point(726, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 16);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Predmet";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Enabled = false;
+            this.label5.Location = new System.Drawing.Point(962, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Odeljenje";
             // 
             // Raspodela
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 531);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Raspodela";
             this.Text = "Raspodela";
             this.Load += new System.EventHandler(this.Raspodela_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -174,5 +260,15 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Godina;
         private System.Windows.Forms.DataGridViewComboBoxColumn Predmet;
         private System.Windows.Forms.DataGridViewComboBoxColumn Odeljenje;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

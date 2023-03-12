@@ -55,5 +55,11 @@ namespace EsDnevnik
             Raspodela f = new Raspodela();
             f.ShowDialog();
         }
+
+        private void upisnicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Upisnica f = new Upisnica();
+            f.ShowDialog();
+        }
     }
 }

@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Reflection.Emit;
 
 namespace EsDnevnik
 {
-    public partial class Raspodela : Form
+    public partial class Upisnica : Form
     {
         DataTable podaci, podaci1;
         SqlCommand menjanja;
         string[] pomocna;
-        public Raspodela()
+        public Upisnica()
         {
             InitializeComponent();
         }
@@ -25,7 +24,7 @@ namespace EsDnevnik
         private void Osvezi()
         {
             podaci = new DataTable();
-            podaci = Konekcija.Unos("SELECT raspodela.id, Osoba.ime + ' ' + Osoba.prezime AS Nastavnik, Skolska_godina.naziv AS Godina, Predmet.naziv AS Predmet, STR(Odeljenje.razred,1,0) + '/' + Odeljenje.indeks AS Odeljenje FROM Raspodela left join Osoba ON Raspodela.nastavnik_id = Osoba.id left join Skolska_godina ON Raspodela.godina_id = Skolska_godina.id left join Predmet ON Raspodela.predmet_id = Predmet.id left join Odeljenje ON Raspodela.odeljenje_id = Odeljenje.id");
+            podaci = Konekcija.Unos("SELECT Upisnica.id AS id, Osoba.ime + ' ' + Osoba.prezime AS 'ime i prezime', STR(Odeljenje.razred,1,0) + '/' + Odeljenje.indeks AS Odeljenje, Smer.naziv AS Smer FROM Upisnica\r\nJOIN Osoba ON Upisnica.osoba_id = Osoba.id\r\nJOIN Odeljenje ON Upisnica.odeljenje_id = Odeljenje.id\r\nJOIN Smer ON Odeljenje.smer_id = Smer.id");
 
             if (dataGridView1.Rows.Count != 1)
             {
@@ -35,73 +34,48 @@ namespace EsDnevnik
                 }
             }
 
-            podaci1 = new DataTable();//Dodavanje skolskih godina
-            podaci1 = Konekcija.Unos("SELECT naziv FROM Skolska_godina");
+            podaci1 = new DataTable();//Dodavanje ucenika
+            podaci1 = Konekcija.Unos("SELECT ime + ' ' + prezime AS 'ime i prezime' FROM Osoba WHERE uloga = 1");
             pomocna = new string[podaci1.Rows.Count];
 
             for (int i = 0; i < podaci1.Rows.Count; i++)
             {
-                pomocna[i] = Convert.ToString(podaci1.Rows[i]["naziv"]);
-                Godina.Items.Add(pomocna[i]);
-            }
-
-            podaci1 = new DataTable();//Dodavanje nastavnika
-            podaci1 = Konekcija.Unos("SELECT ime + ' ' + prezime AS Nastavnik FROM Osoba WHERE uloga = 2");
-            pomocna = new string[podaci1.Rows.Count];
-
-            for (int i = 0; i < podaci1.Rows.Count; i++)
-            {
-                pomocna[i] = Convert.ToString(podaci1.Rows[i]["Nastavnik"]);
-                Nastavnik.Items.Add(pomocna[i]);
-            }
-
-            podaci1 = new DataTable();//Dodavanje predmeta
-            podaci1 = Konekcija.Unos("SELECT DISTINCT naziv FROM Predmet");
-            pomocna = new string[podaci1.Rows.Count];
-
-            for (int i = 0; i < podaci1.Rows.Count; i++)
-            {
-                pomocna[i] = Convert.ToString(podaci1.Rows[i]["naziv"]);
-                Predmet.Items.Add(pomocna[i]);
+                pomocna[i] = Convert.ToString(podaci1.Rows[i]["ime i prezime"]);
+                Ime_i_prezime.Items.Add(pomocna[i]);
             }
 
             podaci1 = new DataTable();//Dodavanje odeljenja
-            podaci1 = Konekcija.Unos("SELECT STR(razred,1,0) + '/' + indeks AS Odlj FROM Odeljenje");
+            podaci1 = Konekcija.Unos("SELECT STR(Odeljenje.razred,1,0) + '/' + Odeljenje.indeks AS Odeljenje FROM Odeljenje");
             pomocna = new string[podaci1.Rows.Count];
 
             for (int i = 0; i < podaci1.Rows.Count; i++)
             {
-                pomocna[i] = Convert.ToString(podaci1.Rows[i]["Odlj"]);
+                pomocna[i] = Convert.ToString(podaci1.Rows[i]["Odeljenje"]);
                 Odeljenje.Items.Add(pomocna[i]);
+            }
+
+            podaci1 = new DataTable();//Dodavanje smerova
+            podaci1 = Konekcija.Unos("SELECT naziv FROM Smer");
+            pomocna = new string[podaci1.Rows.Count];
+
+            for (int i = 0; i < podaci1.Rows.Count; i++)
+            {
+                pomocna[i] = Convert.ToString(podaci1.Rows[i]["naziv"]);
+                Smer.Items.Add(pomocna[i]);
             }
 
             for (int i = 0; i < podaci.Rows.Count; i++)
             {
                 dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells["id"].Value = Convert.ToString(podaci.Rows[i]["id"]);
-                dataGridView1.Rows[i].Cells["Nastavnik"].Value = Convert.ToString(podaci.Rows[i]["Nastavnik"]);
-                dataGridView1.Rows[i].Cells["Godina"].Value = Convert.ToString(podaci.Rows[i]["Godina"]);
-                dataGridView1.Rows[i].Cells["Predmet"].Value = Convert.ToString(podaci.Rows[i]["Predmet"]);
+                dataGridView1.Rows[i].Cells["Id"].Value = Convert.ToString(podaci.Rows[i]["id"]);
+                dataGridView1.Rows[i].Cells["Ime_i_prezime"].Value = Convert.ToString(podaci.Rows[i]["ime i prezime"]);
                 dataGridView1.Rows[i].Cells["Odeljenje"].Value = Convert.ToString(podaci.Rows[i]["Odeljenje"]);
+                dataGridView1.Rows[i].Cells["Smer"].Value = Convert.ToString(podaci.Rows[i]["Smer"]);
             }
+
         }
 
-        private void Raspodela_Load(object sender, EventArgs e)
-        {
-            Osvezi();
-        }
-
-        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
-        {
-            int indeks = dataGridView1.CurrentRow.Index;
-            textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
-            textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Nastavnik"].Value);
-            textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Godina"].Value);
-            textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
-            textBox5.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)//Dugmad
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Obrisi")
             {
@@ -185,7 +159,7 @@ namespace EsDnevnik
                     Osvezi();
                 }
             }
-            
+
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Dodaj")
             {
                 try
@@ -233,7 +207,7 @@ namespace EsDnevnik
 
                         Osvezi();
                     }
-                        
+
                 }
                 catch (Exception ex)
                 {
@@ -241,6 +215,11 @@ namespace EsDnevnik
                     Osvezi();
                 }
             }
+        }
+
+        private void Upisnica_Load(object sender, EventArgs e)
+        {
+            Osvezi();
         }
     }
 }
