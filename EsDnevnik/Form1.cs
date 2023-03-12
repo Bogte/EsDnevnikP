@@ -49,5 +49,11 @@ namespace EsDnevnik
             f1.Text = "Predmet";
             f1.ShowDialog();
         }
+
+        private void raspodelaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Raspodela f = new Raspodela();
+            f.ShowDialog();
+        }
     }
 }

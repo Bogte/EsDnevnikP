@@ -115,6 +115,7 @@ namespace EsDnevnik
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ne mozete da obrisete ove podatake, druge tabele zahtevaju ove podatake! - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Osvezi(tabela);
                 }
             }
 
@@ -180,8 +181,8 @@ namespace EsDnevnik
                 }
                 catch(Exception ex)
                 {
-                    Osvezi(tabela);
                     MessageBox.Show("Podatak vec postoji u tabeli - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Osvezi(tabela);
                 }
             }
 
@@ -199,6 +200,11 @@ namespace EsDnevnik
                             naziv = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
                             string razred;
                             razred = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Razred"].Value);
+
+                            if (naziv == "" || razred == "")
+                            {
+                                throw new Exception();
+                            }
 
                             podaci = new DataTable();
                             podaci = Konekcija.Unos("SELECT naziv, razred FROM " + tabela + " WHERE naziv = " + "'" + naziv + "' AND razred = " + "'" + razred + "'");
@@ -239,6 +245,7 @@ namespace EsDnevnik
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ne mozete da dodate vec postojece podatke! - " + ex.Source, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Osvezi(tabela);
                 }
             }
 

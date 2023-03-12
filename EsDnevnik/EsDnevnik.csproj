@@ -73,6 +73,12 @@
     <Compile Include="Forma.Designer.cs">
       <DependentUpon>Forma.cs</DependentUpon>
     </Compile>
+    <Compile Include="Raspodela.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspodela.Designer.cs">
+      <DependentUpon>Raspodela.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +100,9 @@
     </Compile>
     <EmbeddedResource Include="Forma.resx">
       <DependentUpon>Forma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspodela.resx">
+      <DependentUpon>Raspodela.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
