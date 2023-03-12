@@ -245,12 +245,29 @@ namespace EsDnevnik
 
         }
 
-        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
         {
-            /*if (Convert.ToString(dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["ÏDD"].Value) == "" || Convert.ToString(dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["id"].Value) == "")
+            if (dataGridView1.CurrentRow != null)
             {
-                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
-            }*/
+                int indeks = dataGridView1.CurrentRow.Index;
+
+                if (tabela == "Skolska_godina")
+                {
+                    textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
+                    textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["naziv"].Value);
+                }
+                else if (tabela == "Smer")
+                {
+                    textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["IDD"].Value);
+                    textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Smer"].Value);
+                }
+                else
+                {
+                    textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["IDD"].Value);
+                    textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
+                    textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Razred"].Value);
+                }
+            }
         }
     }
 }
