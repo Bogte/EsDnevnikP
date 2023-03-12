@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EsDnevnik
 {
@@ -163,6 +164,15 @@ namespace EsDnevnik
                     Osvezi();
                 }
             }
+        }
+
+        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int indeks = dataGridView1.CurrentRow.Index;
+            textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Id"].Value);
+            textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Ime_i_prezime"].Value);
+            textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
+            textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Smer"].Value);
         }
 
         private void Upisnica_Load(object sender, EventArgs e)
