@@ -90,18 +90,15 @@ namespace EsDnevnik
             Osvezi();
         }
 
-        /*private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+       /* private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
         {
-            try
-            {
-                int indeks = dataGridView1.CurrentRow.Index;
-                textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
-                textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Nastavnik"].Value);
-                textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Godina"].Value);
-                textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
-                textBox5.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
-            }
-            catch { }
+            int indeks;
+            indeks = dataGridView1.CurrentRow.Index;
+            textBox1.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["id"].Value);
+            textBox2.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Nastavnik"].Value);
+            textBox3.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Godina"].Value);
+            textBox4.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Predmet"].Value);
+            textBox5.Text = Convert.ToString(dataGridView1.Rows[indeks].Cells["Odeljenje"].Value);
         }*/
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
