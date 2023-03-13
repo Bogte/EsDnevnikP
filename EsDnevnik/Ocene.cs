@@ -115,12 +115,10 @@ namespace EsDnevnik
                         int indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
                         string[] ime_prezime = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Ime_i_prezime"].Value).Split(' ');
                         string datum = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Datum"].Value);
-                        string raspodela = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
                         string ocena = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Ocena"].Value);
                         string predmet = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Predmet"].Value);
 
-                        if (ime_prezime[0] == "" || ime_prezime[1] == "" || predmet == "" || datum == "" || raspodela == "" || ocena == "")
-                            throw new Exception();
+                        if (ime_prezime[0] == "" || ime_prezime[1] == "" || predmet == "" || datum == "" || ocena == "") throw new Exception();
 
                         podaci = new DataTable();
                         podaci = Konekcija.Unos("SELECT id FROM Osoba WHERE ime = " + "'" + ime_prezime[0] + "' AND prezime = " + "'" + ime_prezime[1] + "'");
@@ -138,7 +136,7 @@ namespace EsDnevnik
                         podaci = Konekcija.Unos("SELECT * FROM Ocena WHERE datum = '" + datum + "' AND raspodela_id = " + raspodela_id + " AND ocena = '" + ocena + "' AND ucenik_id = " + osoba_id);
                         if (podaci.Rows.Count >= 1) throw new Exception();
 
-                        menjanja.CommandText = ("INSERT INTO Raspodela VALUES ('" + datum + "', " + raspodela_id + ", " + ocena + ", " + ime_prezime + ")");
+                        menjanja.CommandText = ("INSERT INTO Ocena VALUES ('" + datum + "', " + raspodela_id + ", " + ocena + ", " + osoba_id + ")");
 
                         SqlConnection con = new SqlConnection(Konekcija.Veza());
                         con.Open();
