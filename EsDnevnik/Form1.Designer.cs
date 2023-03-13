@@ -37,8 +37,8 @@
             this.raspodelaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upisnicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odeljenjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.oceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(499, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(461, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -123,6 +123,13 @@
             this.odeljenjaToolStripMenuItem.Text = "Odeljenja";
             this.odeljenjaToolStripMenuItem.Click += new System.EventHandler(this.odeljenjaToolStripMenuItem_Click);
             // 
+            // oceneToolStripMenuItem
+            // 
+            this.oceneToolStripMenuItem.Name = "oceneToolStripMenuItem";
+            this.oceneToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.oceneToolStripMenuItem.Text = "Ocene";
+            this.oceneToolStripMenuItem.Click += new System.EventHandler(this.oceneToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -134,18 +141,11 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // oceneToolStripMenuItem
-            // 
-            this.oceneToolStripMenuItem.Name = "oceneToolStripMenuItem";
-            this.oceneToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
-            this.oceneToolStripMenuItem.Text = "Ocene";
-            this.oceneToolStripMenuItem.Click += new System.EventHandler(this.oceneToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 161);
+            this.ClientSize = new System.Drawing.Size(461, 157);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
