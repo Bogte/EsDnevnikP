@@ -128,10 +128,11 @@ namespace EsDnevnik
                         menjanja = new SqlCommand();
 
                         int indeks = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
-                        string[] ime_prezime = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nastavnik"].Value).Split(' ');
+                        string[] ime_prezime = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Ime_i_prezime"].Value).Split(' ');
                         string[] odeljenje = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Odeljenje"].Value).Split('/');
+                        string smer = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Smer"].Value);
 
-                        if (ime_prezime[0] == "" || ime_prezime[1] == "" || odeljenje[0] == "" || odeljenje[1] == "")
+                        if (ime_prezime[0] == "" || ime_prezime[1] == "" || odeljenje[0] == "" || smer == "")
                             throw new Exception();
 
                         podaci = new DataTable();
@@ -143,10 +144,10 @@ namespace EsDnevnik
                         int odeljenje_id = (int)podaci.Rows[0][0];
 
                         podaci = new DataTable();
-                        podaci = Konekcija.Unos("SELECT * FROM Raspodela WHERE nastavnik_id = " + osoba_id + " AND odeljenje_id = " + odeljenje_id);
+                        podaci = Konekcija.Unos("SELECT * FROM Upisnica WHERE osoba_id = " + osoba_id + " AND odeljenje_id = " + odeljenje_id);
                         if (podaci.Rows.Count >= 1) throw new Exception();
 
-                        menjanja.CommandText = ("INSERT INTO Raspodela VALUES (" + osoba_id + ", " + odeljenje_id + ")");
+                        menjanja.CommandText = ("INSERT INTO Upisnica VALUES (" + osoba_id + ", " + odeljenje_id + ")");
 
                         SqlConnection con = new SqlConnection(Konekcija.Veza());
                         con.Open();

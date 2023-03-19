@@ -90,7 +90,7 @@ namespace EsDnevnik
             Osvezi();
         }
 
-       /* private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+        /*private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
         {
             int indeks;
             indeks = dataGridView1.CurrentRow.Index;
